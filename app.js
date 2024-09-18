@@ -30,8 +30,29 @@ function openTab(tabNumber) {
         document.getElementById('tab_four').style.display = 'none'; 
         document.getElementById('tab_five').style.display = 'block'; 
     }
+
+    let tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    tabs[tabNumber - 1].classList.add('active');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     openTab(1); 
 });
+
+function displayChoices(){
+    const petChoice = document.getElementsByName('pet');
+    let selectedPet = '';
+    for (let option of petChoice) {
+        if (option.checked) {
+            selectedPet = option.value;
+            break;
+        }
+    }
+    const selectedColor = document.getElementById('colorSelect').value;
+    const result = `Pet Selected: ${selectedPet}, Color Selected: ${selectedColor}`;
+    document.getElementById('result').innerText = result;
+}

@@ -41,7 +41,31 @@
                 <p>This is the content inside the mobile screen.</p>
             </div>
             <div class="mobile-content" id="tab_two">
-                <h1>Tab 2 Yippeee!</h1>
+                <h1>Choices!</h1>
+                <h2>Pick a pet!</h2>
+                <label>
+                    <input type="radio" name="pet" value="Dog"> Dog
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="pet" value="Cat"> Cat
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="pet" value="Bird"> Bird
+                </label>
+                <br>
+                <h2>Select your favorite color!</h2>
+                <select id="colorSelect">
+                    <option value="Red">Red</option>
+                    <option value="Green">Green</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Yellow">Yellow</option>
+                </select>
+                <br>
+                <br>
+                <button onclick="displayChoices()">Submit</button>
+                <p id="result"></p>
             </div>
             <div class="mobile-content" id="tab_three">
                 <h1>Tab 3</h1>
@@ -53,11 +77,11 @@
                 <h1>Tab 5</h1>
             </div>
             <nav class="tab-bar">
-                <button onclick="openTab(1)">Text</button>
-                <button onclick="openTab(2)">Choices</button>
-                <button onclick="openTab(3)">ToDo</button>
-                <button onclick="openTab(4)">Profile</button>
-                <button onclick="openTab(5)">Colors</button>
+                <button class="tab" onclick="openTab(1)">Text</button>
+                <button class="tab" onclick="openTab(2)">Choices</button>
+                <button class="tab" onclick="openTab(3)">ToDo</button>
+                <button class="tab" onclick="openTab(4)">Profile</button>
+                <button class="tab" onclick="openTab(5)">Colors</button>
             </nav>
         </div>
         <script src="app.js"></script>
