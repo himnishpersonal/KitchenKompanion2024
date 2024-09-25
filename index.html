@@ -68,7 +68,20 @@
                 <p id="result"></p>
             </div>
             <div class="mobile-content" id="tab_three">
-                <h1>Tab 3</h1>
+                <div class="toDo-header">
+                    <h1>To Do</h1>
+                    <input type="text" id="taskInput" placeholder="New Entry...">
+                    <span onclick="newElement()" class="add-button">Add</span>
+                </div>
+
+                <ul id="myUL">
+                    <li class="checked">Register for classes</li>
+                    <li class="checked">Pay tuition and fees</li>
+                    <li>Do Phase 1</li>
+                    <li>Do Phase 2</li>
+                    <li>Do Phase 3</li>
+                    <li>Do Phase 4</li>
+                  </ul>
             </div>
             <div class="mobile-content" id="tab_four">
                 <h1>Tab 4</h1>
@@ -78,7 +91,7 @@
             </div>
             <div class="mobile-content" id="tab_six">
                 <h1>Lower Right</h1>
-                <p class="MM"> Down Here </p>
+                <p class="down-here"> Down Here </p>
             </div>
             <nav class="tab-bar">
                 <button class="tab" onclick="openTab(1)">Text</button>
