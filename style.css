@@ -5,21 +5,18 @@ body {
     justify-content: center; 
     align-items: center;
     background-color: black;
-    height: 100vh;
     overflow: hidden;
 }
 
 .mobile-screen {
     width: 550px;  
-    height: 100vh; 
+    height: 95vh; 
     background-color: lightpink; 
     display: flex;
     flex-direction: column;
     position: relative;
     overflow-y: auto;
 }
-
-
 
 .content {
     padding: 20px;
