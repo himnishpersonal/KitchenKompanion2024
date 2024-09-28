@@ -84,7 +84,16 @@
                   </ul>
             </div>
             <div class="mobile-content" id="tab_four">
-                <h1>Tab 4</h1>
+                <h1>Profile</h1>
+
+                <div class="profile-region"> 
+                    <img class="pfp-large "src="pfp.png" alt="Current user's profile picture" onclick="document.getElementById('warning-banner').style.display='flex';">
+                    <h2>Squirrel E. User</h2>
+                    <div id="warning-banner" class="pfp-onclick-warning">
+                        <div id="warning-banner-text"><strong>Warning!</strong> Do not click on the profile image.</div>
+                        <div id="warning-banner-x" onclick="this.parentElement.style.display='none';">&times;</div>
+                    </div>
+                </div>
             </div>
             <div class="mobile-content" id="tab_five">
                 <h1>Tab 5</h1>
