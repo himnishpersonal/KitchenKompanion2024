@@ -1,123 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>"KitchenKompanionApp</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div class="mobile-screen">
-            <div class="mobile-content" id="tab_one">
-                <h2>Tab One Yippeee!</h2>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>    
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-                <p>This is the content inside the mobile screen.</p>
-            </div>
-            <div class="mobile-content" id="tab_two">
-                <h1>Choices!</h1>
-                <h2>Pick a pet!</h2>
-                <label>
-                    <input type="radio" name="pet" value="Dog"> Dog
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="pet" value="Cat"> Cat
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="pet" value="Bird"> Bird
-                </label>
-                <br>
-                <h2>Select your favorite color!</h2>
-                <select id="colorSelect">
-                    <option value="Red">Red</option>
-                    <option value="Green">Green</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Yellow">Yellow</option>
+<head>
+    <meta charset="UTF-8">
+    <title>Kitchen Kompanion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="title-bar">
+        <div class="hamburger-menu">&#9776;</div>
+        <h1>Kitchen Kompanion</h1>
+        <i class="fas fa-user-circle"></i>
+    </header>
+
+    <div class="mobile-screen">
+        <div class="mobile-content" id="tab_one">
+            <section class="welcome-section">
+                <h2>Welcome, John!</h2>
+                <label for="space-select">Your current space:</label>
+                <select id="space-select">
+                    <option value="kitchen">Tempo 215</option>
+                    <option value="pantry">Parent's Home</option>
+                    <option value="fridge">Grandparent's Home</option>
+                </select>
+            </section>
+
+            <section class="inventory-info">
+                <div class="info-box">
+                    <h3>You have 10 items</h3>
+                    <p>Tap to view</p>
+                </div>
+                <div class="info-box">
+                    <h3>You have 2 item(s) about to expire</h3>
+                    <p>Tap to view</p>
+                </div>
+            </section>
+        </div>
+
+        
+        <div class="mobile-content" id="tab_two">
+            <h2>Tab 2</h2>
+            <p>This is a placeholder for Tab 2 content.</p>
+        </div>
+
+        
+        <div class="mobile-content" id="tab_three">
+            <h2>Recipe Generation</h2>
+            <div>
+                <h4>Select Your Preferences!</h4>
+                <label for="cooking-skill">Cooking Skill:</label>
+                <select id="cooking-skill" class="styled-dropdown">
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate" selected>Intermediate</option> 
+                    <option value="Advanced">Advanced</option>
                 </select>
                 <br>
                 <br>
-                <button onclick="displayChoices()">Submit</button>
-                <p id="result"></p>
+                <br>
+                <label for="dietary-restrictions">Dietary Restrictions:</label>
+                <select id="dietary-restrictions" class="styled-dropdown">
+                    <option value="None">None</option>
+                    <option value="Vegetarian" selected>Vegetarian</option> 
+                    <option value="Vegan">Vegan</option>
+                    <option value="Gluten-Free">Gluten-Free</option>
+                    <option value="Keto">Keto</option>
+                </select>
+                <br>
+                <br>
+                <br>
+                <label for="allergens">Allergens:</label>
+                <select id="allergens" class="styled-dropdown">
+                    <option value="None">None</option>
+                    <option value="Peanuts" selected>Peanuts</option> 
+                    <option value="Dairy">Dairy</option>
+                    <option value="Soy">Soy</option>
+                    <option value="Gluten">Gluten</option>
+                </select>
+                <br>
+                <br>
+                <br>
+                <button id="generate-recipes" class="styled-button" onclick=" setupRecipeGeneration()">Generate Recipes</button>
+                <br>
+                <br>
+                <br>
+                <div id="recipe-output" class="recipe-output"></div>
             </div>
-            <div class="mobile-content" id="tab_three">
-                <div class="toDo-header">
-                    <h1>To Do</h1>
-                    <input type="text" id="taskInput" placeholder="New Entry...">
-                    <span onclick="newElement()" class="add-button">Add</span>
-                </div>
-
-                <ul id="myUL">
-                    <li class="checked">Register for classes</li>
-                    <li class="checked">Pay tuition and fees</li>
-                    <li>Do Phase 1</li>
-                    <li>Do Phase 2</li>
-                    <li>Do Phase 3</li>
-                    <li>Do Phase 4</li>
-                  </ul>
-            </div>
-            <div class="mobile-content" id="tab_four">
-                <h1>Profile</h1>
-
-                <div class="profile-region"> 
-                    <img class="pfp-large "src="pfp.png" alt="Current user's profile picture" onclick="document.getElementById('warning-banner').style.display='flex';">
-                    <h2>Squirrel E. User</h2>
-                    <div id="warning-banner" class="pfp-onclick-warning">
-                        <div id="warning-banner-text"><strong>Warning!</strong> Do not click on the profile image.</div>
-                        <div id="warning-banner-x" onclick="this.parentElement.style.display='none';">&times;</div>
-                    </div>
-                </div>
-            </div>
-            <div class="mobile-content" id="tab_five">
-                <h1>Colors</h1>
-                <p style="color: yellow; background-color: black;">
-                    This text is yellow and the background is black.
-                </p>
-                <p style="color: purple; background-color: yellow;">
-                    This text is purple and the background is yellow.
-                </p>
-            </div>
-            <div class="mobile-content" id="tab_six">
-                <h1>Lower Right</h1>
-                <p class="down-here"> Down Here </p>
-            </div>
-            <nav class="tab-bar">
-                <button class="tab" onclick="openTab(1)">Text</button>
-                <button class="tab" onclick="openTab(2)">Choices</button>
-                <button class="tab" onclick="openTab(3)">ToDo</button>
-                <button class="tab" onclick="openTab(4)">Profile</button>
-                <button class="tab" onclick="openTab(5)">Colors</button>
-                <button class="tab" onclick="openTab(6)">LR</button>
-            </nav>
         </div>
-        <script src="app.js"></script>
-    </body>
-    </html>
+
+
+        <div class="mobile-content" id="tab_four">
+            <h2>Tab 4</h2>
+            <p>This is a placeholder for Tab 4 content.</p>
+        </div>
+
+        
+        <div class="mobile-content" id="tab_five">
+            <h2>Tab 5</h2>
+            <p>This is a placeholder for Tab 5 content.</p>
+        </div>
+
+        
+        <div class="mobile-content" id="tab_six">
+            <h2>Tab 6</h2>
+            <p>This is a placeholder for Tab 6 content.</p>
+        </div>
+
+    
+        <nav class="tab-bar">
+            <button class="tab selected" onclick="openTab(1)">
+                <i class="fas fa-bread-slice"></i><br>Food Inventory
+            </button>
+            <button class="tab" onclick="openTab(2)">
+                <i class="fas fa-plus-circle"></i><br>Food Input
+            </button>
+            <button class="tab" onclick="openTab(3)">
+                <i class="fas fa-utensils"></i><br>Recipe
+            </button>
+            <button class="tab" onclick="openTab(4)">
+                <i class="fas fa-list"></i><br>Shopping List
+            </button>
+            <button class="tab" onclick="openTab(5)">
+                <i class="fas fa-users"></i><br>Shared Spaces
+            </button>
+        </nav>
+    </div>
+
+    <script src="app.js"></script>
+</body>
 </html>
