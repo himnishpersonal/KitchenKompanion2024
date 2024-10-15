@@ -115,22 +115,8 @@ function openTab(tabNumber) {
         document.getElementById('tab_four').style.display = 'block'; 
         document.getElementById('tab_five').style.display = 'none'; 
         document.getElementById('tab_six').style.display = 'none';
-    }else if(tabNumber === 5){
-        document.getElementById('tab_one').style.display = 'none'; 
-        document.getElementById('tab_two').style.display = 'none'; 
-        document.getElementById('tab_three').style.display = 'none'; 
-        document.getElementById('tab_four').style.display = 'none'; 
-        document.getElementById('tab_five').style.display = 'block'; 
-        document.getElementById('tab_six').style.display = 'none';
-    }else if(tabNumber === 6){
-        document.getElementById('tab_one').style.display = 'none'; 
-        document.getElementById('tab_two').style.display = 'none'; 
-        document.getElementById('tab_three').style.display = 'none'; 
-        document.getElementById('tab_four').style.display = 'none'; 
-        document.getElementById('tab_five').style.display = 'none';
-        document.getElementById('tab_six').style.display = 'block';
     }
-
+    
     let tabs = document.querySelectorAll('.tab');
     tabs.forEach(tab => {
         tab.classList.remove('active');
