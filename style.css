@@ -152,3 +152,15 @@ body {
 .styled-button:hover {
     background-color: #45a049;
 }
+
+.favorite-star {
+    cursor: pointer;
+    font-size: 20px;
+    color: gold;
+    margin-left: 10px
+}
+
+.favorite-star:hover {
+    color: orange;
+}
+
