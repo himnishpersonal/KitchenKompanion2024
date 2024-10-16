@@ -119,9 +119,54 @@
 
 
         <div class="mobile-content" id="tab_four">
-            <h2>Tab 4</h2>
-            <p>This is a placeholder for Tab 4 content.</p>
+            <h2>Shopping List</h2>
+            <input type="text" id="shopping-item-input" placeholder="Enter item"/>
+            <button id="add-to-shopping-list" class="styled-button" onclick="addItemToShopping()" >Add to Shopping List</button>
+
+            <select id="sort-options" onchange="sortShoppingList()">
+                <option value="recent">Sort by Recency</option>
+                <option value="alphabetical">Sort Alphabetically</option>
+            </select>
+
+            <ul id="shopping-list-output"></ul>
         </div>
+        <script>
+            let shoppingList = [];
+    
+            function addItemToShopping() {
+                const inputField = document.getElementById('shopping-item-input');
+                const item = inputField.value.trim(); 
+    
+                if (item) {
+                    shoppingList.push({name: item, timestamp: new Date() }); 
+                    updateShoppingListDisplay(); 
+                    inputField.value = ''; // clears the input field
+                } else {
+                    alert('Please enter an item to add to the shopping list.');
+                }
+            }
+    
+            function updateShoppingListDisplay() {
+                const shoppingListOutput = document.getElementById('shopping-list-output');
+                shoppingListOutput.innerHTML = ''; // Clear previous list
+    
+                shoppingList.forEach((item) => {
+                    shoppingListOutput.innerHTML += `<li>${item.name}</li>`; // Add each item to the list
+                });
+            }
+
+            function sortShoppingList(){
+                const sortOption = document.getElementById('sort-options').value;
+
+                if(sortOption === 'alphabetical'){
+                    shoppingList.sort((a,b) => a.name.localeCompare(b.name));
+                }else{
+                    shoppingList.sort((a, b) => b.timestamp - a.timestamp);
+                }
+
+                updateShoppingListDisplay();
+            }
+        </script>
 
         <div class="mobile-content" id="tab_five">
             <h2>Profile Customization</h2>
