@@ -82,9 +82,9 @@ const recipes = [
   new Recipe('Rice and Chicken', ['Rice', 'Chicken Breast'], 30, 'Intermediate', []),
 ];
 
+const foodItemsInUserRefrigerator = [
 
-
-
+]
 
 function openTab(tabNumber) {
     document.getElementById('hamburger_main').style.display = 'none'
@@ -201,3 +201,29 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+//add to refrigerator
+
+function showAddToRefrigeratorForm(page) {
+    window.location.href = page; 
+}
+
+function returnToMainPage(){
+    window.history.back();
+}
+
+document.getElementById('new-food-form').addEventListener('submit', function (event) {
+    event.preventDefault(); 
+
+    const name = document.getElementById('name').value;
+    console.log(name);
+    const num = parseInt(document.getElementById('quantity').value);
+    const date = document.getElementById('date').value;
+
+    const food = new FoodItem(name, date, num);
+    foodItemsInUserRefrigerator.push(food);
+
+    console.log('Current food items in the refrigerator:', foodItemsInUserRefrigerator);
+
+    document.getElementById('new-food-form').reset();
+    alert(`Successfully added ${name} to the refrigerator!`);
+});
