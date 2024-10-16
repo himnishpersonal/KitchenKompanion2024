@@ -87,34 +87,38 @@ const recipes = [
 
 
 function openTab(tabNumber) {
+    document.getElementById('hamburger_main').style.display = 'none'
+    console.log("open tab called")
     if (tabNumber === 1) {
         document.getElementById('tab_one').style.display = 'block'; 
         document.getElementById('tab_two').style.display = 'none'; 
         document.getElementById('tab_three').style.display = 'none'; 
         document.getElementById('tab_four').style.display = 'none'; 
         document.getElementById('tab_five').style.display = 'none'; 
-        document.getElementById('tab_six').style.display = 'none';
     }else if(tabNumber === 2){
         document.getElementById('tab_one').style.display = 'none'; 
         document.getElementById('tab_two').style.display = 'block'; 
         document.getElementById('tab_three').style.display = 'none'; 
         document.getElementById('tab_four').style.display = 'none'; 
         document.getElementById('tab_five').style.display = 'none'; 
-        document.getElementById('tab_six').style.display = 'none';
     }else if(tabNumber === 3){
         document.getElementById('tab_one').style.display = 'none'; 
         document.getElementById('tab_two').style.display = 'none'; 
         document.getElementById('tab_three').style.display = 'block'; 
         document.getElementById('tab_four').style.display = 'none'; 
         document.getElementById('tab_five').style.display = 'none'; 
-        document.getElementById('tab_six').style.display = 'none';
     }else if(tabNumber === 4){
         document.getElementById('tab_one').style.display = 'none'; 
         document.getElementById('tab_two').style.display = 'none'; 
         document.getElementById('tab_three').style.display = 'none'; 
         document.getElementById('tab_four').style.display = 'block'; 
         document.getElementById('tab_five').style.display = 'none'; 
-        document.getElementById('tab_six').style.display = 'none';
+    }else if(tabNumber === 5){
+        document.getElementById('tab_one').style.display = 'none'; 
+        document.getElementById('tab_two').style.display = 'none'; 
+        document.getElementById('tab_three').style.display = 'none'; 
+        document.getElementById('tab_four').style.display = 'none'; 
+        document.getElementById('tab_five').style.display = 'block'; 
     }
     
     let tabs = document.querySelectorAll('.tab');
@@ -123,6 +127,14 @@ function openTab(tabNumber) {
     });
 
     tabs[tabNumber - 1].classList.add('active');
+}
+
+function toggleHamburgerMenu() {
+    if(document.getElementById('hamburger_main').style.display == 'none'){
+        document.getElementById('hamburger_main').style.display = 'block'
+        return
+    }
+    document.getElementById('hamburger_main').style.display = 'none'
 }
 
 function generateRecipeRecommendations(user, foodItems) {
@@ -153,7 +165,38 @@ function setupRecipeGeneration() {
   });
 }
 
+function setUserDetailsInUI(){
+    Array.from(document.getElementsByClassName('cur_user_name_instance')).forEach(instance =>
+        instance.textContent = user.name
+    )
+    Array.from(document.getElementsByClassName('cur_user_email_instance')).forEach(instance =>
+        instance.textContent = user.email
+    )
+}
+
+function initializeHamburgerListener(){
+    const hamburgerMenu = document.getElementById('hamburger-menu')
+    hamburgerMenu.addEventListener("click", toggleHamburgerMenu);
+    Array.from(hamburgerMenu.children).forEach(child =>
+        child.addEventListener('click', function(event) {
+            event.stopPropagation(); //this sucks.
+        }));
+}
+
+function setUserEmail(){
+    user.email = document.getElementById('email_input').value
+    setUserDetailsInUI()
+}
+
+function setUserName(){
+    user.name = document.getElementById('name_input').value
+    setUserDetailsInUI()
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    initializeHamburgerListener()
+    setUserDetailsInUI()
+
     openTab(1); 
 });
 
