@@ -156,14 +156,64 @@ function setupRecipeGeneration() {
 
       const recommendedRecipes = generateRecipeRecommendations(user, foodItems);
       recipeOutput.innerHTML = '';
+      document.getElementById('favorite-recipes-output').style.display = 'none';
+      recipeOutput.style.display = 'block';
       if (recommendedRecipes.length > 0) {
-          const recipeList = recommendedRecipes.map(recipe => `<li>${recipe.name} (Skill Level: ${recipe.skillLevel}, Time: ${recipe.timeToMake} mins)</li>`).join('');
+          const recipeList = recommendedRecipes.map((recipe,index) => `
+          <li id="recipe-${index}">
+           ${recipe.name}(Skill Level: ${recipe.skillLevel}, Time: ${recipe.timeToMake} mins)
+           <span class="favorite-star" data-recipe-id="${index}" onclick="toggleFav(${index})">☆</span>
+           </li>`).join('');
           recipeOutput.innerHTML = `<h3>Recommended Recipes:</h3><ul>${recipeList}</ul>`;
       } else {
           recipeOutput.innerHTML = '<p>No suitable recipes found based on your preferences.</p>';
       }
   });
 }
+let favoriteRecipes = [];
+
+function toggleFav(recipeId){
+    const recipe = recipes[recipeId];
+    const star = document.querySelector(`#recipe-${recipeId} .favorite-star`);
+
+    const isFavorited = favoriteRecipes.some(favRecipe => favRecipe.name === recipe.name);
+    // Remove from favorites
+    if(isFavorited){
+        favoriteRecipes = favoriteRecipes.filter(favRecipe => favRecipe != recipe.name);
+        star.innerHTML = '☆'; // Empty
+    }else{
+        favoriteRecipes.push(recipe)
+        star.innerHTML = '★'; // Filled in
+    }
+
+    updateFavorites();
+}
+
+function updateFavorites(){
+    const favoriteOutput = document.getElementById('favorite-recipes-output');
+    // if there is at least one favorited recipe
+    if (favoriteRecipes.length > 0){
+        const favoriteList = favoriteRecipes.map(recipe => `<li>${recipe.name}</li>`).join('');
+        favoriteOutput.innerHTML = `<h3>Your Favorite Recipes:</h3><ul>${favoriteList}</ul>`;
+    }else{
+        favoriteOutput.innerHTML = '<p>No favorite recipes added yet.</p>'
+    }
+}
+
+function setupFavorites(){
+    const favoriteButton = document.getElementById('favorite-recipes');
+    const recipeOutput = document.getElementById('recipe-output');
+    const favoriteOutput = document.getElementById('favorite-recipes-output');
+
+    favoriteButton.addEventListener('click', () => {
+        recipeOutput.innerHTML = '';
+        recipeOutput.style.display = 'none';
+        favoriteOutput.style.display = 'block';
+        updateFavorites();
+    });
+}
+
+setupFavorites();
 
 function setUserDetailsInUI(){
     Array.from(document.getElementsByClassName('cur_user_name_instance')).forEach(instance =>
