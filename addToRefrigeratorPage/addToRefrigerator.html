@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitchen Kompanion Add to Refrigerator</title>
+    <link rel="stylesheet" href="addToRefrigerator.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head> 
+<body>
+    <div class="mobile-screen">
+        <div class="row">
+            <button class="back-button" onclick="history.back()"> < Back</button>
+            <h1>Add Food</h1>
+            
+        </div>
+     
+        <form id="new-food-form">
+            <label for="name">Food Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter food name" required>
+            <br><br>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" min="1" required>
+            <br><br>
+
+            <label for="date">Expiration Date:</label>
+            <input type="date" id="date" name="date" required>
+            <br><br>
+
+            <button type="reset" id="clear">Clear</button>
+            <button type="submit" id="submit">Submit</button>
+
+        </form>
+    </div>
+    
+    <script src="../app.js"></script>
+</body>
+</html> 
