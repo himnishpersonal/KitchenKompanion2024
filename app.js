@@ -93,34 +93,38 @@ const foodItemsInUserPantry = [
 ]
 
 function openTab(tabNumber) {
+    document.getElementById('hamburger_main').style.display = 'none'
+    console.log("open tab called")
     if (tabNumber === 1) {
         document.getElementById('tab_one').style.display = 'block'; 
         document.getElementById('tab_two').style.display = 'none'; 
         document.getElementById('tab_three').style.display = 'none'; 
         document.getElementById('tab_four').style.display = 'none'; 
         document.getElementById('tab_five').style.display = 'none'; 
-        document.getElementById('tab_six').style.display = 'none';
     }else if(tabNumber === 2){
         document.getElementById('tab_one').style.display = 'none'; 
         document.getElementById('tab_two').style.display = 'block'; 
         document.getElementById('tab_three').style.display = 'none'; 
         document.getElementById('tab_four').style.display = 'none'; 
         document.getElementById('tab_five').style.display = 'none'; 
-        document.getElementById('tab_six').style.display = 'none';
     }else if(tabNumber === 3){
         document.getElementById('tab_one').style.display = 'none'; 
         document.getElementById('tab_two').style.display = 'none'; 
         document.getElementById('tab_three').style.display = 'block'; 
         document.getElementById('tab_four').style.display = 'none'; 
         document.getElementById('tab_five').style.display = 'none'; 
-        document.getElementById('tab_six').style.display = 'none';
     }else if(tabNumber === 4){
         document.getElementById('tab_one').style.display = 'none'; 
         document.getElementById('tab_two').style.display = 'none'; 
         document.getElementById('tab_three').style.display = 'none'; 
         document.getElementById('tab_four').style.display = 'block'; 
         document.getElementById('tab_five').style.display = 'none'; 
-        document.getElementById('tab_six').style.display = 'none';
+    }else if(tabNumber === 5){
+        document.getElementById('tab_one').style.display = 'none'; 
+        document.getElementById('tab_two').style.display = 'none'; 
+        document.getElementById('tab_three').style.display = 'none'; 
+        document.getElementById('tab_four').style.display = 'none'; 
+        document.getElementById('tab_five').style.display = 'block'; 
     }
     
     let tabs = document.querySelectorAll('.tab');
@@ -129,6 +133,14 @@ function openTab(tabNumber) {
     });
 
     tabs[tabNumber - 1].classList.add('active');
+}
+
+function toggleHamburgerMenu() {
+    if(document.getElementById('hamburger_main').style.display == 'none'){
+        document.getElementById('hamburger_main').style.display = 'block'
+        return
+    }
+    document.getElementById('hamburger_main').style.display = 'none'
 }
 
 function generateRecipeRecommendations(user, foodItems) {
@@ -150,16 +162,97 @@ function setupRecipeGeneration() {
 
       const recommendedRecipes = generateRecipeRecommendations(user, foodItems);
       recipeOutput.innerHTML = '';
+      document.getElementById('favorite-recipes-output').style.display = 'none';
+      recipeOutput.style.display = 'block';
       if (recommendedRecipes.length > 0) {
-          const recipeList = recommendedRecipes.map(recipe => `<li>${recipe.name} (Skill Level: ${recipe.skillLevel}, Time: ${recipe.timeToMake} mins)</li>`).join('');
+          const recipeList = recommendedRecipes.map((recipe,index) => `
+          <li id="recipe-${index}">
+           ${recipe.name}(Skill Level: ${recipe.skillLevel}, Time: ${recipe.timeToMake} mins)
+           <span class="favorite-star" data-recipe-id="${index}" onclick="toggleFav(${index})">☆</span>
+           </li>`).join('');
           recipeOutput.innerHTML = `<h3>Recommended Recipes:</h3><ul>${recipeList}</ul>`;
       } else {
           recipeOutput.innerHTML = '<p>No suitable recipes found based on your preferences.</p>';
       }
   });
 }
+let favoriteRecipes = [];
+
+function toggleFav(recipeId){
+    const recipe = recipes[recipeId];
+    const star = document.querySelector(`#recipe-${recipeId} .favorite-star`);
+
+    const isFavorited = favoriteRecipes.some(favRecipe => favRecipe.name === recipe.name);
+    // Remove from favorites
+    if(isFavorited){
+        favoriteRecipes = favoriteRecipes.filter(favRecipe => favRecipe != recipe.name);
+        star.innerHTML = '☆'; // Empty
+    }else{
+        favoriteRecipes.push(recipe)
+        star.innerHTML = '★'; // Filled in
+    }
+
+    updateFavorites();
+}
+
+function updateFavorites(){
+    const favoriteOutput = document.getElementById('favorite-recipes-output');
+    // if there is at least one favorited recipe
+    if (favoriteRecipes.length > 0){
+        const favoriteList = favoriteRecipes.map(recipe => `<li>${recipe.name}</li>`).join('');
+        favoriteOutput.innerHTML = `<h3>Your Favorite Recipes:</h3><ul>${favoriteList}</ul>`;
+    }else{
+        favoriteOutput.innerHTML = '<p>No favorite recipes added yet.</p>'
+    }
+}
+
+function setupFavorites(){
+    const favoriteButton = document.getElementById('favorite-recipes');
+    const recipeOutput = document.getElementById('recipe-output');
+    const favoriteOutput = document.getElementById('favorite-recipes-output');
+
+    favoriteButton.addEventListener('click', () => {
+        recipeOutput.innerHTML = '';
+        recipeOutput.style.display = 'none';
+        favoriteOutput.style.display = 'block';
+        updateFavorites();
+    });
+}
+
+setupFavorites();
+
+function setUserDetailsInUI(){
+    Array.from(document.getElementsByClassName('cur_user_name_instance')).forEach(instance =>
+        instance.textContent = user.name
+    )
+    Array.from(document.getElementsByClassName('cur_user_email_instance')).forEach(instance =>
+        instance.textContent = user.email
+    )
+}
+
+function initializeHamburgerListener(){
+    const hamburgerMenu = document.getElementById('hamburger-menu')
+    hamburgerMenu.addEventListener("click", toggleHamburgerMenu);
+    Array.from(hamburgerMenu.children).forEach(child =>
+        child.addEventListener('click', function(event) {
+            event.stopPropagation(); //this sucks.
+        }));
+}
+
+function setUserEmail(){
+    user.email = document.getElementById('email_input').value
+    setUserDetailsInUI()
+}
+
+function setUserName(){
+    user.name = document.getElementById('name_input').value
+    setUserDetailsInUI()
+}
 
 document.addEventListener('DOMContentLoaded', function() {
+    initializeHamburgerListener()
+    setUserDetailsInUI()
+
     openTab(1); 
 });
 
