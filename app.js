@@ -82,7 +82,13 @@ const recipes = [
   new Recipe('Rice and Chicken', ['Rice', 'Chicken Breast'], 30, 'Intermediate', []),
 ];
 
+//food inventory
 const foodItemsInUserRefrigerator = [
+    
+
+]
+
+const foodItemsInUserPantry = [
 
 ]
 
