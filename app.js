@@ -17,6 +17,7 @@ class FoodItem {
   }
 }
 
+// test
 class Recipe {
   constructor(name, ingredients, timeToMake, skillLevel, dietaryRestrictions) {
       this.name = name;
