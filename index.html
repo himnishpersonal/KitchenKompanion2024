@@ -8,21 +8,44 @@
 </head>
 <body>
     <header class="title-bar">
-        <div class="hamburger-menu">&#9776;</div>
+        <div id="hamburger-menu" class="hamburger-menu disable-select">&#9776;
+            <div id="hamburger_main" class="hamburger-dropdown-container">
+                <nav class="hamburger-dropdown">
+                    <div class="hamburger-item" onclick="openTab(1)">
+                        <span><i class="fas fa-bread-slice"></i> Food Inventory</span>
+                    </div>
+                    <div class="hamburger-item" onclick="openTab(2)">
+                        <span><i class="fas fa-plus-circle"></i> Food Input</span>
+                    </div>
+                    <div class="hamburger-item" onclick="openTab(3)">
+                        <span><i class="fas fa-utensils"></i> Recipe</span>
+                    </div>
+                    <div class="hamburger-item" onclick="openTab(4)">
+                        <span><i class="fas fa-list"></i> Shopping List</span>
+                    </div>
+                    <div class="hamburger-item" onclick="openTab(5)">
+                        <span><i class="fas fa-user"></i> Customize Profile</span>
+                    </div>
+                </nav>
+            </div>
+        </div>
         <h1>Kitchen Kompanion</h1>
-        <i class="fas fa-user-circle"></i>
+        <div id="profile-menu" onclick="openTab(5)">
+            <i class="fas fa-user-circle"></i>
+        </div>
     </header>
 
     <div class="mobile-screen">
+
         <div class="mobile-content" id="tab_one">
             <section class="welcome-section">
-                <h2>Welcome, John!</h2>
-                <label for="space-select">Your current space:</label>
+                <h2>Welcome, <span class="cur_user_name_instance">PLACEHOLDER!</span></h2>
+                <!-- <label for="space-select">Your current space:</label>
                 <select id="space-select">
                     <option value="kitchen">Tempo 215</option>
                     <option value="pantry">Parent's Home</option>
                     <option value="fridge">Grandparent's Home</option>
-                </select>
+                </select> -->
             </section>
 
             <section class="inventory-info">
@@ -39,8 +62,13 @@
 
         
         <div class="mobile-content" id="tab_two">
-            <h2>Tab 2</h2>
-            <p>This is a placeholder for Tab 2 content.</p>
+            <h2>Food Input</h2>
+            <section class="inventory-info">
+                <button class="info-box" type="button" onclick="showAddToRefrigeratorForm('addToRefrigeratorPage/addToRefrigerator.html')"><h3>Add to Refrigerator</h3></button>
+                <button class="info-box" type="button"><h3>Add to Pantry</h3></button>
+            </section>
+
+          
         </div>
 
         
@@ -85,13 +113,109 @@
                 <br>
                 <br>
                 <div id="recipe-output" class="recipe-output"></div>
+                <div id="favorite-recipes-output" style="display: none;"></div>
             </div>
         </div>
 
 
         <div class="mobile-content" id="tab_four">
-            <h2>Tab 4</h2>
-            <p>This is a placeholder for Tab 4 content.</p>
+            <h2>Shopping List</h2>
+            <input type="text" id="shopping-item-input" placeholder="Enter item"/>
+            <button id="add-to-shopping-list" class="styled-button" onclick="addItemToShopping()" >Add to Shopping List</button>
+
+            <select id="sort-options" onchange="sortShoppingList()">
+                <option value="recent">Sort by Recency</option>
+                <option value="alphabetical">Sort Alphabetically</option>
+            </select>
+
+            <ul id="shopping-list-output"></ul>
+        </div>
+        <script>
+            let shoppingList = [];
+    
+            function addItemToShopping() {
+                const inputField = document.getElementById('shopping-item-input');
+                const item = inputField.value.trim(); 
+    
+                if (item) {
+                    shoppingList.push({name: item, timestamp: new Date() }); 
+                    updateShoppingListDisplay(); 
+                    inputField.value = ''; // clears the input field
+                } else {
+                    alert('Please enter an item to add to the shopping list.');
+                }
+            }
+    
+            function updateShoppingListDisplay() {
+                const shoppingListOutput = document.getElementById('shopping-list-output');
+                shoppingListOutput.innerHTML = ''; // Clear previous list
+    
+                shoppingList.forEach((item) => {
+                    shoppingListOutput.innerHTML += `<li>${item.name}</li>`; // Add each item to the list
+                });
+            }
+
+            function sortShoppingList(){
+                const sortOption = document.getElementById('sort-options').value;
+
+                if(sortOption === 'alphabetical'){
+                    shoppingList.sort((a,b) => a.name.localeCompare(b.name));
+                }else{
+                    shoppingList.sort((a, b) => b.timestamp - a.timestamp);
+                }
+
+                updateShoppingListDisplay();
+            }
+        </script>
+
+        <div class="mobile-content" id="tab_five">
+            <h2>Profile Customization</h2>
+            <h3>Personal Details</h3>
+            <div>The name on your account is <span class="cur_user_name_instance">PLACEHOLDER</span></div>
+            <br>
+            <form>
+                <label>
+                    <input id="name_input" type="text" name="change_name" value="" placeholder="Enter new name here"> 
+                    <input type="button" value="Change name" onclick=setUserName()>
+                </label><br>
+            </form>
+            <br>
+            <div>The email for your account is <span class="cur_user_email_instance">PLACEHOLDER</span></div>
+            <br>
+            <form>
+                <label>
+                    <input id="email_input" type="text" name="change_email" value="" placeholder="Enter new email here"> 
+                    <input type="button" value="Change email" onclick=setUserEmail()>
+                </label><br>
+            </form>
+            <h3>Cooking skill</h3>
+            <select id="cooking-skill" class="styled-dropdown">
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate" selected>Intermediate</option> 
+                <option value="Advanced">Advanced</option>
+            </select>
+            <h3>Dietary Restrictions</h3>
+            <form>
+                <label>
+                    <input type="checkbox" name="no_peanuts" value="false"> No peanuts
+                </label><br>
+                <label>
+                    <input type="checkbox" name="no_dairy" value="false"> No dairy
+                </label><br>
+                <label>
+                    <input type="checkbox" name="no_soy" value="false"> No soy
+                </label><br>
+                <label>
+                    <input type="checkbox" name="no_gluten" value="false"> No gluten
+                </label><br>
+            </form>
+
+            <h3>Dietary Preferences</h3>
+            <div>TODO. We have not decided on this category yet.</div>
+
+            <form>
+                
+            </form>
         </div>
     
         <nav class="tab-bar">
