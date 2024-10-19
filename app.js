@@ -8,10 +8,11 @@ const user = {
 };
 
 class FoodItem {
-  constructor(name, expiration, quantity) {
+  constructor(name, expiration, quantity,allergen) {
       this.name = name;
       this.expiration = expiration;
       this.quantity = quantity;
+      this.allergen = allergen;
   }
 }
 
