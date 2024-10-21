@@ -1,5 +1,3 @@
-//hello test
-//ejnfiernf
 const user = {
   name: 'John',
   email: 'john@example.com',
@@ -10,7 +8,7 @@ const user = {
 };
 
 class FoodItem {
-  constructor(name, expiration, quantity,allergen) {
+  constructor(name, expiration, quantity, allergen) {
       this.name = name;
       this.expiration = expiration;
       this.quantity = quantity;
@@ -310,29 +308,63 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//add to refrigerator
-
-function showAddToRefrigeratorForm(page) {
-    window.location.href = page; 
-}
-
-function returnToMainPage(){
-    window.history.back();
-}
+//add to refrigerator/pantry
 
 document.getElementById('new-food-form').addEventListener('submit', function (event) {
     event.preventDefault(); 
 
     const name = document.getElementById('name').value;
-    console.log(name);
     const num = parseInt(document.getElementById('quantity').value);
-    const date = document.getElementById('date').value;
+    const expiration = document.getElementById('date').value;
+    const allergens = document.getElementById('allergens').value;
 
-    const food = new FoodItem(name, date, num);
-    foodItemsInUserRefrigerator.push(food);
+
+    //  constructor(name, expiration, quantity, allergen) {
+    //     this.name = name;
+    //     this.expiration = expiration;
+    //     this.quantity = quantity;
+    //     this.allergen = allergen;
+    // }
+
+    const pantryOrRef = document.getElementById('pantryOrRefrigerator').value;
+
+    const food = new FoodItem(name, expiration, num, allergens);
 
     console.log('Current food items in the refrigerator:', foodItemsInUserRefrigerator);
 
     document.getElementById('new-food-form').reset();
-    alert(`Successfully added ${name} to the refrigerator!`);
+    if (pantryOrRef === 'refrigerator') {
+        foodItemsInUserRefrigerator.push(food);
+    } else if (pantryOrRef === 'pantry') {
+        foodItemsInUserPantry.push(food);
+    }
+
+    displayFood(pantryOrRef)
+    document.getElementById('new-food-form').reset();
+
+
 });
+
+
+function displayFood (pantryOrRef){
+    const displayFoodScroll = document.getElementById('food-input-scroll');
+    displayFoodScroll.innerHTML = '';
+
+    let toDisplay = [];
+
+    if (pantryOrRef === 'refrigerator') {
+        itemsToDisplay = foodItemsInUserRefrigerator;
+    } else if (pantryOrRef === 'pantry') {
+        itemsToDisplay = foodItemsInUserPantry;
+    }
+
+    itemsToDisplay.forEach(function(food) {
+        const foodItem = document.createElement('p');
+        foodItem.textContent = food.name;
+        displayFoodScroll.appendChild(foodItem);
+    });
+
+    
+}
+
+

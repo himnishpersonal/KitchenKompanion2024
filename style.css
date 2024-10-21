@@ -214,5 +214,27 @@ body {
     max-height: 150px; 
 }
 
+.food-input-scroll{
+    width: 300px;   
+    height: 200px;  
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+    padding-left: 20px;
+}
 
+#food-input-scroll p {
+    border-bottom: 1px solid rgb(216, 216, 216); 
+    padding: 5px 0;   
+    width: 90%;           
+  }
+  
+  #food-input-scroll p:last-child {
+    border-bottom: none;            
+  }
+
+.food-input-title-container {
+    display: flex;
+    align-items: center; 
+    gap: 150px;
+  }
 

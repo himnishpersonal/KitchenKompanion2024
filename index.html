@@ -62,12 +62,67 @@
 
         
         <div class="mobile-content" id="tab_two">
-            <h2>Food Input</h2>
-            <section class="inventory-info">
-                <button class="info-box" type="button" onclick="showAddToRefrigeratorForm('addToRefrigeratorPage/addToRefrigerator.html')"><h3>Add to Refrigerator</h3></button>
-                <button class="info-box" type="button"><h3>Add to Pantry</h3></button>
-            </section>
+             <div class="food-input-title-container">
+                <h2>Input Food</h2>
+                <div>
+                    <label for="name">Refrigerator or Pantry:</label>
+                    <select id="pantryOrRefrigerator" name="pantryOrRefrigerator" class="styled-dropdown" required>
+                        <option value="refrigerator">Refrigerator</option>
+                        <option value="pantry">Pantry</option>
+                    </select>
+                </div>
+            </div>
+            
 
+            <form id="new-food-form">
+                <label for="name">Food Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter food name" required>
+                <br>
+                <br>
+                <br>
+    
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" min="1" required>
+                <br>
+                <br>
+                <br>
+    
+                <label for="date">Expiration Date:</label>
+                <input type="date" id="date" name="date" required>
+                <br>
+                <br>
+                <br>
+
+                <label for="allergens">Allergens:</label>
+                <select id="allergens" class="styled-dropdown">
+                    <option value="None" selected>None</option>
+                    <option value="Peanuts">Peanuts</option> 
+                    <option value="Dairy">Dairy</option>
+                    <option value="Soy">Soy</option>
+                    <option value="Gluten">Gluten</option>
+                </select>
+                <br>
+                <br>
+                <br>
+    
+                <button type="reset" id="clear" class="styled-button">Clear</button>
+                <button type="submit" id="submit" class="styled-button">Enter</button>
+    
+            </form>
+
+            <br>
+            <br>
+            <br>
+
+            <h2>Your Foods</h2>
+                
+            
+            <div class="food-input-scroll" id="food-input-scroll">
+            </div>
+
+            <br>
+
+           
           
         </div>
 
