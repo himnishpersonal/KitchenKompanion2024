@@ -164,3 +164,55 @@ body {
     color: orange;
 }
 
+
+.scrollable-box {
+    max-height: 150px;   
+    overflow-y: auto;   
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+
+.scrollable-box ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.scrollable-box li {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scrollable-box h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.favorite-star {
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #ffcc00;
+}
+
+#recipe-output, #favorite-recipes-output {
+    display: none; 
+}
+
+
+#favorite-recipes-output {
+    display: none;
+    overflow-y: auto; 
+    max-height: 150px; 
+}
+
+
+
