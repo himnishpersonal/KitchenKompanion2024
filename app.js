@@ -17,39 +17,117 @@ class FoodItem {
 }
 
 class Recipe {
-  constructor(name, ingredients, timeToMake, skillLevel, dietaryRestrictions, allergens) {
+  constructor(name, ingredients, timeToMake, skillLevel, dietaryRestrictions, allergens,instructions) {
       this.name = name;
       this.ingredients = ingredients;
       this.timeToMake = timeToMake;
       this.skillLevel = skillLevel;
       this.dietaryRestrictions = dietaryRestrictions;  
       this.allergens = allergens;
+      this.instructions = instructions;
   }
 }
 
 
 
 const recipes = [
-    new Recipe('Vegetarian Stir-fry', ['Carrots', 'Broccoli', 'Soy Sauce'], 30, 'Beginner', ['Vegetarian'], ['None']),
-    new Recipe('Peanut Butter Sandwich', ['Peanut Butter', 'Bread'], 5, 'Beginner', [], ['Peanuts', 'Gluten']),
-    new Recipe('Omelette', ['Eggs', 'Cheese'], 10, 'Intermediate', [], ['Dairy']),
-    new Recipe('Chicken Salad', ['Chicken Breast', 'Lettuce', 'Tomatoes'], 20, 'Intermediate', [], ['None']),
-    new Recipe('Grilled Salmon', ['Salmon', 'Lettuce'], 25, 'Intermediate', ['Pescatarian'], ['None']),
-    new Recipe('Tomato Rice', ['Rice', 'Tomatoes'], 40, 'Beginner', ['Vegetarian', 'Gluten-free'], ['None']),
-    new Recipe('Cheesy Broccoli', ['Broccoli', 'Cheese'], 15, 'Beginner', ['Vegetarian'], ['Dairy']),
-    new Recipe('Rice and Chicken', ['Rice', 'Chicken Breast'], 30, 'Intermediate', [], ['None']),
-    new Recipe('Spaghetti with Tomato Sauce', ['Pasta', 'Canned Tomatoes', 'Olive Oil', 'Salt'], 20, 'Beginner', ['Vegetarian'], ['Gluten']),
-    new Recipe('Rice and Beans', ['Rice', 'Black Beans', 'Olive Oil', 'Salt'], 25, 'Beginner', ['Vegetarian', 'Gluten-free'], ['None']),
-    new Recipe('Broccoli and Cheese Omelette', ['Eggs', 'Broccoli', 'Cheese'], 15, 'Intermediate', ['Vegetarian'], ['Dairy']),
-    new Recipe('Chicken and Rice Salad', ['Chicken Breast', 'Rice', 'Lettuce'], 30, 'Intermediate', [], ['None']),
-    new Recipe('Shrimp Stir-fry', ['Shrimp', 'Broccoli', 'Carrots', 'Olive Oil'], 25, 'Intermediate', ['Pescatarian'], ['Shellfish']),
-    new Recipe('Apple and Peanut Butter Toast', ['Apples', 'Peanut Butter', 'Bread'], 5, 'Beginner', [], ['Peanuts', 'Gluten']),
-    new Recipe('Grilled Cheese Sandwich', ['Bread', 'Cheese', 'Butter'], 10, 'Beginner', [], ['Dairy', 'Gluten']),
-    new Recipe('Greek Yogurt Parfait', ['Yogurt', 'Honey', 'Almonds'], 10, 'Beginner', [], ['Dairy', 'Peanuts']),
-    new Recipe('Spinach and Egg Scramble', ['Spinach', 'Eggs', 'Butter'], 15, 'Beginner', ['Vegetarian'], ['Dairy']),
-    new Recipe('Ground Beef and Rice', ['Ground Beef', 'Rice'], 30, 'Intermediate', [], ['None']),
-    new Recipe('Tomato and Cheese Salad', ['Tomatoes', 'Cheese', 'Lettuce'], 15, 'Beginner', ['Vegetarian'], ['Dairy'])
+    new Recipe('Vegetarian Stir-fry', 
+        ['Carrots', 'Broccoli', 'Soy Sauce'], 
+        30, 'Beginner', ['Vegetarian'], ['None'], 
+        'Chop the carrots and broccoli. Stir-fry in a pan with soy sauce until tender.'
+    ),
+    new Recipe('Peanut Butter Sandwich', 
+        ['Peanut Butter', 'Bread'], 
+        5, 'Beginner', [], ['Peanuts', 'Gluten'], 
+        'Spread peanut butter on one slice of bread. Top with the other slice and enjoy.'
+    ),
+    new Recipe('Omelette', 
+        ['Eggs', 'Cheese'], 
+        10, 'Intermediate', [], ['Dairy'], 
+        'Whisk the eggs, pour into a heated pan, and cook until set. Sprinkle cheese before folding.'
+    ),
+    new Recipe('Chicken Salad', 
+        ['Chicken Breast', 'Lettuce', 'Tomatoes'], 
+        20, 'Intermediate', [], ['None'], 
+        'Cook and dice the chicken breast. Combine with lettuce and tomatoes in a bowl.'
+    ),
+    new Recipe('Grilled Salmon', 
+        ['Salmon', 'Lettuce'], 
+        25, 'Intermediate', ['Pescatarian'], ['None'], 
+        'Season salmon and grill for 10 minutes per side. Serve on a bed of lettuce.'
+    ),
+    new Recipe('Tomato Rice', 
+        ['Rice', 'Tomatoes'], 
+        40, 'Beginner', ['Vegetarian', 'Gluten-free'], ['None'], 
+        'Cook the rice. Dice tomatoes and mix with rice before serving.'
+    ),
+    new Recipe('Cheesy Broccoli', 
+        ['Broccoli', 'Cheese'], 
+        15, 'Beginner', ['Vegetarian'], ['Dairy'], 
+        'Steam broccoli until tender, then sprinkle with cheese to melt.'
+    ),
+    new Recipe('Rice and Chicken', 
+        ['Rice', 'Chicken Breast'], 
+        30, 'Intermediate', [], ['None'], 
+        'Cook the rice. Grill the chicken, dice, and serve over the rice.'
+    ),
+    new Recipe('Spaghetti with Tomato Sauce', 
+        ['Pasta', 'Canned Tomatoes', 'Olive Oil', 'Salt'], 
+        20, 'Beginner', ['Vegetarian'], ['Gluten'], 
+        'Boil pasta until tender. Heat tomatoes with olive oil, season, and combine with pasta.'
+    ),
+    new Recipe('Rice and Beans', 
+        ['Rice', 'Black Beans', 'Olive Oil', 'Salt'], 
+        25, 'Beginner', ['Vegetarian', 'Gluten-free'], ['None'], 
+        'Cook rice. Mix with black beans and season with salt and olive oil.'
+    ),
+    new Recipe('Broccoli and Cheese Omelette', 
+        ['Eggs', 'Broccoli', 'Cheese'], 
+        15, 'Intermediate', ['Vegetarian'], ['Dairy'], 
+        'Whisk eggs, add steamed broccoli and cheese, and cook until set.'
+    ),
+    new Recipe('Chicken and Rice Salad', 
+        ['Chicken Breast', 'Rice', 'Lettuce'], 
+        30, 'Intermediate', [], ['None'], 
+        'Cook rice and grill chicken. Mix with lettuce and serve chilled.'
+    ),
+    new Recipe('Shrimp Stir-fry', 
+        ['Shrimp', 'Broccoli', 'Carrots', 'Olive Oil'], 
+        25, 'Intermediate', ['Pescatarian'], ['Shellfish'], 
+        'Stir-fry shrimp with broccoli and carrots in olive oil until cooked.'
+    ),
+    new Recipe('Apple and Peanut Butter Toast', 
+        ['Apples', 'Peanut Butter', 'Bread'], 
+        5, 'Beginner', [], ['Peanuts', 'Gluten'], 
+        'Spread peanut butter on toast. Slice apples and place on top.'
+    ),
+    new Recipe('Grilled Cheese Sandwich', 
+        ['Bread', 'Cheese', 'Butter'], 
+        10, 'Beginner', [], ['Dairy', 'Gluten'], 
+        'Butter the bread, add cheese between slices, and grill until golden.'
+    ),
+    new Recipe('Greek Yogurt Parfait', 
+        ['Yogurt', 'Honey', 'Almonds'], 
+        10, 'Beginner', [], ['Dairy', 'Peanuts'], 
+        'Layer yogurt with honey and almonds in a bowl or glass.'
+    ),
+    new Recipe('Spinach and Egg Scramble', 
+        ['Spinach', 'Eggs', 'Butter'], 
+        15, 'Beginner', ['Vegetarian'], ['Dairy'], 
+        'Sauté spinach in butter, add eggs, and scramble until cooked.'
+    ),
+    new Recipe('Ground Beef and Rice', 
+        ['Ground Beef', 'Rice'], 
+        30, 'Intermediate', [], ['None'], 
+        'Cook rice. Brown the ground beef and serve over rice.'
+    ),
+    new Recipe('Tomato and Cheese Salad', 
+        ['Tomatoes', 'Cheese', 'Lettuce'], 
+        15, 'Beginner', ['Vegetarian'], ['Dairy'], 
+        'Chop tomatoes and cheese. Toss with lettuce and serve.'
+    )
 ];
+
 
 
 //food inventory
@@ -142,6 +220,12 @@ function toggleHamburgerMenu() {
     document.getElementById('hamburger_main').style.display = 'none'
 }
 
+function openRecipeDetails(recipeId) {
+    localStorage.setItem('selectedRecipe', JSON.stringify(recipes[recipeId]));
+    window.location.href = 'recipeDetailsPage/recipeDetails.html';
+}
+
+
 function generateRecipeRecommendations({ cookingSkill, dietaryRestrictions, allergens }, foodItems) {
     let recipeList = [];
     const availableFoodNames = foodItems.map(item => item.name.toLowerCase());
@@ -204,9 +288,9 @@ function setupRecipeGeneration() {
         recipeOutput.style.display = 'block';
         if (recommendedRecipes.length > 0) {
             const recipeList = recommendedRecipes.map((recipe, index) => `
-                <li id="recipe-${index}">
+                <li id="recipe-${index}" onclick="openRecipeDetails(${index})">
                     ${recipe.name} (Skill Level: ${recipe.skillLevel}, Time: ${recipe.timeToMake} mins)
-                    <span class="favorite-star" data-recipe-id="${index}" onclick="toggleFav(${index})">☆</span>
+                    <span class="favorite-star" data-recipe-id="${index}" onclick="toggleFav(${index}); event.stopPropagation();">☆</span>
                 </li>`).join('');
             recipeOutput.innerHTML = `<h3>Recommended Recipes:</h3><ul>${recipeList}</ul>`;
         } else {
@@ -214,6 +298,9 @@ function setupRecipeGeneration() {
         }
     });
 }
+
+
+
 
 const favoriteButton = document.getElementById('favorite-recipes');
 const favoriteOutput = document.getElementById('favorite-recipes-output');

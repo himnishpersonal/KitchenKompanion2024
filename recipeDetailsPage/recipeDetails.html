@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Details</title>
+    <link rel="stylesheet" href="recipeDetails.css">
+</head> 
+<body>
+    <div class="mobile-screen">
+        <div class="row">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1 id="recipe-name">Recipe Name</h1>
+        </div>
+     
+        <div id="recipe-details">
+            <p><strong>Skill Level:</strong> <span id="skill-level"></span></p>
+            <p><strong>Time to Make:</strong> <span id="time-to-make"></span> minutes</p>
+            <p><strong>Ingredients:</strong></p>
+            <ul id="ingredients-list"></ul>
+            <p><strong>Dietary Restrictions:</strong> <span id="dietary-restrictions"></span></p>
+            <p><strong>Allergens:</strong> <span id="allergens"></span></p>
+            <p><strong>Instructions:</strong></p>
+            <p id="instructions"></p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const selectedRecipe = JSON.parse(localStorage.getItem('selectedRecipe'));
+
+            document.getElementById('recipe-name').textContent = selectedRecipe.name;
+            document.getElementById('skill-level').textContent = selectedRecipe.skillLevel;
+            document.getElementById('time-to-make').textContent = selectedRecipe.timeToMake;
+            document.getElementById('dietary-restrictions').textContent = selectedRecipe.dietaryRestrictions.join(', ');
+            document.getElementById('allergens').textContent = selectedRecipe.allergens.join(', ');
+            document.getElementById('instructions').textContent = selectedRecipe.instructions;
+            const ingredientsList = document.getElementById('ingredients-list');
+            selectedRecipe.ingredients.forEach(ingredient => {
+                const li = document.createElement('li');
+                li.textContent = ingredient;
+                ingredientsList.appendChild(li);
+            });
+        });
+    </script>
+    <script src="../app.js"></script>
+</body>
+</html>
