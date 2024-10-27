@@ -135,6 +135,12 @@ body {
     color: #FF6F00;
 }
 
+.tab-bar button.selected {
+    background-color: white;  
+    color: #FF6F00;
+    font-weight: bold;
+}
+
 
 
 

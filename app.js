@@ -212,6 +212,16 @@ function openTab(tabNumber) {
     tabs[tabNumber - 1].classList.add('active');
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const tabButtons = document.querySelectorAll('.tab-bar button');
+    function selectTab(event) {
+        tabButtons.forEach(button => button.classList.remove('selected'));
+        event.currentTarget.classList.add('selected');
+    }
+    tabButtons.forEach(button => button.addEventListener('click', selectTab));
+});
+
+
 function toggleHamburgerMenu() {
     if(document.getElementById('hamburger_main').style.display == 'none'){
         document.getElementById('hamburger_main').style.display = 'block'
