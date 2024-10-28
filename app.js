@@ -459,7 +459,7 @@ function isExpired(food){
 
 function generateMainItemDeleteButton(foodName, container, displayFoodScroll, displayOrExpiry){
     let deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Remove Food';
+        deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
         deleteButton.classList.add('delete-button');
 
         deleteButton.addEventListener('click', function() {
