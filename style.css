@@ -146,6 +146,19 @@ body {
 }
 
 
+#clear {
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: #b83434;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+
 .styled-button {
     padding: 10px 20px;
     margin-top: 15px;
