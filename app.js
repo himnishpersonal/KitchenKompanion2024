@@ -416,13 +416,6 @@ document.getElementById('new-food-form').addEventListener('submit', function (ev
     const allergens = document.getElementById('allergens').value;
 
 
-    //  constructor(name, expiration, quantity, allergen) {
-    //     this.name = name;
-    //     this.expiration = expiration;
-    //     this.quantity = quantity;
-    //     this.allergen = allergen;
-    // }
-
     const pantryOrRef = document.getElementById('pantryOrRefrigerator').value;
 
     const food = new FoodItem(name, expiration, num, allergens);
@@ -435,33 +428,26 @@ document.getElementById('new-food-form').addEventListener('submit', function (ev
     } else if (pantryOrRef === 'pantry') {
         foodItemsInUserPantry.push(food);
     }
+    //display item
 
-    displayFood(pantryOrRef)
     document.getElementById('new-food-form').reset();
 
+    const addedMessage = document.getElementById('added-message');
+    addedMessage.textContent = `${name} successfully added, click to see all foods`;
+    addedMessage.style.display = 'block';
 
+    addedMessage.addEventListener('click', function() {
+        openTab(1);  
+        document.getElementById('tab_one').style.display = 'block'; 
+        document.getElementById('tab_two').style.display = 'none'; 
+        document.getElementById('tab_three').style.display = 'none'; 
+        document.getElementById('tab_four').style.display = 'none'; 
+        document.getElementById('tab_five').style.display = 'none'; 
+        addedMessage.style.display = 'none'; 
+    });
 });
 
 
-function displayFood (pantryOrRef){
-    const displayFoodScroll = document.getElementById('food-input-scroll');
-    displayFoodScroll.innerHTML = '';
-
-    let toDisplay = [];
-
-    if (pantryOrRef === 'refrigerator') {
-        itemsToDisplay = foodItemsInUserRefrigerator;
-    } else if (pantryOrRef === 'pantry') {
-        itemsToDisplay = foodItemsInUserPantry;
-    }
-
-    itemsToDisplay.forEach(function(food) {
-        const foodItem = document.createElement('p');
-        foodItem.textContent = food.name;
-        displayFoodScroll.appendChild(foodItem);
-    });
-
-}
 
 function isExpired(food){
     const today = new Date();
