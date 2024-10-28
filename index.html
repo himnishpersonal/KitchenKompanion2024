@@ -38,28 +38,16 @@
     <div class="mobile-screen">
 
         <div class="mobile-content" id="tab_one">
-            <section class="welcome-section">
-                <h2>Welcome, <span class="cur_user_name_instance">PLACEHOLDER!</span></h2>
-                <!-- <label for="space-select">Your current space:</label>
-                <select id="space-select">
-                    <option value="kitchen">Tempo 215</option>
-                    <option value="pantry">Parent's Home</option>
-                    <option value="fridge">Grandparent's Home</option>
-                </select> -->
-            </section>
-
-            <section class="inventory-info">
-                <div class="info-box">
-                    <h3>You have 10 items</h3>
-                    <p>Tap to view</p>
-                </div>
-                <div class="info-box">
-                    <h3>You have 2 item(s) about to expire</h3>
-                    <p>Tap to view</p>
-                </div>
-            </section>
+            <h2>Food in your 
+                <select class="styled-select" id="food-location-select">
+                    <option value="refrigerator">Refrigerator</option>
+                    <option value="pantry">Pantry</option>
+                </select>
+            </h2>
+            <div id="food-display-main" class="food-display-scroll"></div>
+            <h2>Food about to expire</h2>
+            <div id="food-display-expiring" class="food-display-scroll"></div>
         </div>
-
         
         <div class="mobile-content" id="tab_two">
              <div class="food-input-title-container">

@@ -131,17 +131,17 @@ const recipes = [
 
 
 //food inventory
-const foodItemsInUserRefrigerator = [
+let foodItemsInUserRefrigerator = [
     new FoodItem('Carrots', '2024-11-01', 10, 'None'),
     new FoodItem('Broccoli', '2024-10-20', 5, 'None'),
     new FoodItem('Eggs', '2024-10-15', 12, 'None'),
     new FoodItem('Chicken Breast', '2024-10-17', 3, 'None'),
     new FoodItem('Tomatoes', '2024-10-18', 6, 'None'),
     new FoodItem('Cheese', '2024-11-05', 2, 'Dairy'),
-    new FoodItem('Lettuce', '2024-10-22', 4, 'None'),
+    new FoodItem('Lettuce', '2024-11-01', 4, 'None'),
     new FoodItem('Salmon', '2024-10-18', 2, 'None'),
     new FoodItem('Bread', '2024-10-15', 5, 'Gluten'),
-    new FoodItem('Milk', '2024-10-12', 2, 'Dairy'),
+    new FoodItem('Milk', '2024-10-29', 2, 'Dairy'),
     new FoodItem('Yogurt', '2024-10-25', 6, 'Dairy'),
     new FoodItem('Butter', '2024-11-10', 1, 'Dairy'),
     new FoodItem('Spinach', '2024-10-14', 3, 'None'),
@@ -151,7 +151,7 @@ const foodItemsInUserRefrigerator = [
     new FoodItem('Grapes', '2024-10-16', 5, 'None')
 ]
 
-const foodItemsInUserPantry = [
+let foodItemsInUserPantry = [
     new FoodItem('Peanut Butter', '2024-12-10', 1, 'Peanuts'),
     new FoodItem('Rice', '2024-12-25', 20, 'None'),
     new FoodItem('Pasta', '2024-12-30', 10, 'Gluten'),
@@ -461,7 +461,123 @@ function displayFood (pantryOrRef){
         displayFoodScroll.appendChild(foodItem);
     });
 
-    
 }
 
+function isExpired(food){
+    const today = new Date();
+    if(food.expiration - today <= 0){
+        return true
+    }
+    return false
+}
 
+function generateMainItemDeleteButton(foodName, container, displayFoodScroll, displayOrExpiry){
+    let deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Remove Food';
+        deleteButton.classList.add('delete-button');
+
+        deleteButton.addEventListener('click', function() {
+            //remove food from display and data
+            displayFoodScroll.removeChild(container);
+            if(foodItemsInUserPantry.includes(foodName, 0)){
+
+                //this is just for removing. what a PITA !!!!
+                let removeAt = foodItemsInUserPantry.findIndex(food => food.name === foodName);
+                if (removeAt !== -1) {
+                    foodItemsInUserPantry.splice(removeAt, 1);
+                }
+
+            } else {
+
+                //this is just for removing
+                let removeAt = foodItemsInUserRefrigerator.findIndex(food => food.name === foodName);
+                if (removeAt !== -1) {
+                    foodItemsInUserRefrigerator.splice(removeAt, 1);
+                }
+
+            }
+
+            //refresh food from other display on main screen
+            if(displayOrExpiry == 'display'){
+                displayExpiringFood()
+            } else {
+                displayFoodMain()
+            }
+
+        });
+
+    return deleteButton
+}
+
+function displayExpiringFood(){
+    const displayFoodScroll = document.getElementById('food-display-expiring');
+    //for refreshing the display
+    displayFoodScroll.innerHTML = '';
+
+    let allFoods = [...foodItemsInUserPantry, ...foodItemsInUserRefrigerator]
+
+    //for sorting by proximity to expiration
+    let sortedFoods = allFoods.sort((a, b) => new Date(b.expiration) - new Date(a.expiration));
+
+    sortedFoods.forEach(function(food) {
+        let expiry = new Date(food.expiration);
+        const today = new Date();
+
+        let day_diff = Math.floor((expiry - today)/(1000*60*60*24));
+        let foodItemContainer = document.createElement('div');
+        foodItemContainer.classList.add("food-display-scroll-container")
+        let foodItem = document.createElement('p');
+
+        if(day_diff > 0 && day_diff < 11) {
+            foodItem.innerHTML = "<strong>(Expiring in "+day_diff+" days)</strong> " + food.name;
+        } else if(day_diff <= 0) { 
+            foodItem.innerHTML = "<strong>(PAST EXPIRATION DATE)</strong> " + food.name;
+        } else { 
+            return;
+        }
+
+        let deleteButton = generateMainItemDeleteButton(food.name, foodItemContainer, displayFoodScroll, 'expiry')
+
+        foodItemContainer.appendChild(foodItem);
+        foodItemContainer.appendChild(deleteButton);
+        
+        displayFoodScroll.appendChild(foodItemContainer);
+    });
+}
+
+displayExpiringFood()
+
+function displayFoodMain (pantryOrRef){
+    const displayFoodScroll = document.getElementById('food-display-main');
+    //for refreshing the display
+    displayFoodScroll.innerHTML = '';
+
+    if (pantryOrRef === 'refrigerator') {
+        itemsToDisplay = foodItemsInUserRefrigerator;
+    } else if (pantryOrRef === 'pantry') {
+        itemsToDisplay = foodItemsInUserPantry;
+    }
+
+    itemsToDisplay.forEach(function(food) {
+        const foodItemContainer = document.createElement('div')
+        foodItemContainer.classList.add("food-display-scroll-container")
+        const foodItem = document.createElement('p');
+        foodItem.textContent = food.name;
+
+        let deleteButton = generateMainItemDeleteButton(food.name, foodItemContainer, displayFoodScroll, 'display')
+
+        foodItemContainer.appendChild(foodItem);
+        foodItemContainer.appendChild(deleteButton)
+        displayFoodScroll.appendChild(foodItemContainer)
+    });
+
+}
+
+displayFoodMain('refrigerator')
+
+const locationSelector = document.getElementById('food-location-select');
+
+locationSelector.addEventListener('change', function() {
+    const locationChosen = locationSelector.value;
+    displayFoodMain(locationChosen)
+});
