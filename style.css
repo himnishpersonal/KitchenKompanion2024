@@ -218,8 +218,6 @@ body {
 }
 
 .delete-icon {
-    position: absolute;
-    right: 10px;
     cursor: pointer;
     font-size: 1.2em;
 }
@@ -330,4 +328,41 @@ body {
 
 #quantity {
     width: 28%;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal label {
+    margin-top: 10px;
+}
+
+.modal button {
+    margin-top: 15px;
+}
+
+.icon-container {
+    display: flex;
+    gap: 8px; /* Adjust gap between icons as needed */
+    position: absolute;
+    right: 10px;
+}
+
+.refrigerator-icon {
+    cursor: pointer;
+    font-size: 1.2em;
 }
