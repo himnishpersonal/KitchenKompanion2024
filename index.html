@@ -45,7 +45,7 @@
                 </select>
             </h2>
             <div id="food-display-main" class="food-display-scroll"></div>
-            <h2>Food about to expire</h2>
+            <h2>Expired and Expiring Foods</h2>
             <div id="food-display-expiring" class="food-display-scroll"></div>
         </div>
         
@@ -227,7 +227,7 @@
                             <span>${item.name}</span>
                             <span class="icon-container">
                                 <span class="refrigerator-icon" onclick="openRefrigeratorModal('${item.name}')">🧊</span>
-                                <span class="delete-icon" onclick="removeItem(${index})">🗑️</span>
+                                <span class="delete-icon" onclick="removeItem(${index})"><i class="fas fa-trash"></i></span>
                             </span>
                         </li>`;
                 });
