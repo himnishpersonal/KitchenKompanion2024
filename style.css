@@ -269,3 +269,6 @@ body {
     gap: 150px;
   }
 
+#quantity {
+    width: 28%;
+}
