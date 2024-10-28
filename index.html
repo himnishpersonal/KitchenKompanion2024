@@ -160,13 +160,17 @@
 
         <div class="mobile-content" id="tab_four">
             <h2>Shopping List</h2>
-            <input type="text" id="shopping-item-input" placeholder="Enter item"/>
-            <button id="add-to-shopping-list" class="styled-button" onclick="addItemToShopping()" >Add to Shopping List</button>
+            <div class="input-container">
+                <input type="text" id="shopping-item-input" placeholder="Enter item"/>
+                <button id="add-to-shopping-list" class="styled-button-shopping" onclick="addItemToShopping()" >Add to Shopping List</button>
+            </div>
 
-            <select id="sort-options" onchange="sortShoppingList()">
-                <option value="recent">Sort by Recency</option>
-                <option value="alphabetical">Sort Alphabetically</option>
-            </select>
+            <div class="sort-container">
+                <select id="sort-options" onchange="sortShoppingList()">
+                    <option value="recent">Sort by Recency</option>
+                    <option value="alphabetical">Sort Alphabetically</option>
+                </select>
+            </div>
 
             <ul id="shopping-list-output"></ul>
         </div>
@@ -188,11 +192,20 @@
     
             function updateShoppingListDisplay() {
                 const shoppingListOutput = document.getElementById('shopping-list-output');
-                shoppingListOutput.innerHTML = ''; // Clear previous list
+                shoppingListOutput.innerHTML = ''; // Clear text
     
-                shoppingList.forEach((item) => {
-                    shoppingListOutput.innerHTML += `<li>${item.name}</li>`; // Add each item to the list
+                shoppingList.forEach((item, index) => {
+                    shoppingListOutput.innerHTML += `
+                        <li class="shopping-item">
+                            <span>${item.name}</span>
+                            <span class="delete-icon" onclick="removeItem(${index})">🗑️</span>
+                        </li>`;
                 });
+            }
+
+            function removeItem(index) {
+                shoppingList.splice(index, 1); // Remove item at the given index
+                updateShoppingListDisplay(); // Refresh the list
             }
 
             function sortShoppingList(){
