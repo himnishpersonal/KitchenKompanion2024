@@ -228,7 +228,7 @@ function toggleHamburgerMenu() {
         return
     }
     document.getElementById('hamburger_main').style.display = 'none'
-}
+
 
 function openRecipeDetails(recipeId) {
     localStorage.setItem('selectedRecipe', JSON.stringify(recipes[recipeId]));
@@ -277,6 +277,19 @@ function generateRecipeRecommendations({ cookingSkill, dietaryRestrictions, alle
     console.log(recipeList);
     return recipeList;
 }
+}
+
+const nameInputField = document.getElementById('name');
+const keyboardOverlay = document.getElementById('keyboard-overlay');
+const closeKeyboardButton = document.querySelector('.close-keyboard');
+
+nameInputField.addEventListener('focus', () => {
+    keyboardOverlay.style.display = 'block';
+});
+
+closeKeyboardButton.addEventListener('click', () => {
+    keyboardOverlay.style.display = 'none';
+});
 
 
 function setupRecipeGeneration() {
@@ -559,11 +572,11 @@ function displayFoodMain (pantryOrRef){
 
 }
 
-displayFoodMain('refrigerator')
+displayFoodMain('refrigerator');
 
 const locationSelector = document.getElementById('food-location-select');
 
 locationSelector.addEventListener('change', function() {
     const locationChosen = locationSelector.value;
-    displayFoodMain(locationChosen)
+    displayFoodMain(locationChosen);
 });
