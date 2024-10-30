@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <div id="keyboard-overlay" class="keyboard-overlay">
+        <img src="KitchenKompanion2024/keyboard.png" alt="Keyboard Image" class="keyboard-image">
+        <button class="close-keyboard">Close</button>
+    </div>
     <header class="title-bar">
         <div id="hamburger-menu" class="hamburger-menu disable-select">&#9776;
             <div id="hamburger_main" class="hamburger-dropdown-container">
@@ -192,11 +196,11 @@
                         <option value="Gluten">Gluten</option>
                         <option value="Peanuts">Peanuts</option>
                         <option value="Shellfish">Shellfish</option>
-                        <!-- Add more options as needed -->
                     </select>
             
-                    <button type="button" onclick="closeModal()">Cancel</button>
                     <button type="submit">Add to Refrigerator</button>
+                    <button type="button" onclick="handleAddToPantry()">Add to Pantry</button>
+                    <button type="button" onclick="closeModal()">Cancel</button>
 
             </div>
         </div>
@@ -226,18 +230,27 @@
                         <li class="shopping-item">
                             <span>${item.name}</span>
                             <span class="icon-container">
-                                <span class="refrigerator-icon" onclick="openRefrigeratorModal('${item.name}')">🧊</span>
+                                <span class="refrigerator-icon" onclick="openRefrigeratorModal('${item.name}')">+</span>
                                 <span class="delete-icon" onclick="removeItem(${index})"><i class="fas fa-trash"></i></span>
                             </span>
                         </li>`;
                 });
             }
             function openRefrigeratorModal(itemName) {
-                document.getElementById('name').value = itemName;
+                document.getElementById('name').value = '';
+                document.getElementById('quantity').value = '';
+                document.getElementById('date').value = '';
+                document.getElementById('allergens').value = 'None';   
+                document.getElementById('name').value = itemName; 
+                document.getElementById('refrigerator-modal').removeAttribute('data-index');
                 document.getElementById('refrigerator-modal').style.display = 'block';
             }
 
             function closeModal() {
+                document.getElementById('name').value = '';
+                document.getElementById('quantity').value = '';
+                document.getElementById('date').value = '';
+                document.getElementById('allergens').value = 'None';
                 document.getElementById('refrigerator-modal').style.display = 'none';
             }
 
@@ -257,7 +270,13 @@
                 shoppingList.splice(index, 1);
               
                 updateShoppingListDisplay();
+                displayFoodMain('refrigerator')
                 document.getElementById('new-food-form').reset();
+
+                document.getElementById('name').value = '';
+                document.getElementById('quantity').value = '';
+                document.getElementById('date').value = '';
+                document.getElementById('allergens').value = 'None';
                 closeModal();
                 alert(`${name} added to the refrigerator list.`);
             }
@@ -277,6 +296,21 @@
                 }
 
                 updateShoppingListDisplay();
+            }
+            
+            function handleAddToPantry(){
+                const name = document.getElementById('name').value;
+                const quantity = parseInt(document.getElementById('quantity').value);
+                const expiration = document.getElementById('date').value;
+                const allergens = document.getElementById('allergens').value;
+
+                const food = new FoodItem(name, expiration, quantity, allergens);
+                foodItemsInUserPantry.push(food); // Add to pantry list
+
+                displayFoodMain('pantry'); // Update pantry display
+                document.getElementById('new-food-form').reset(); // Reset form fields
+                closeModal(); // Close the modal
+                alert(`${name} added to the pantry list.`); 
             }
         </script>
 
