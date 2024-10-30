@@ -230,10 +230,15 @@ const user = {
       document.getElementById('hamburger_main').style.display = 'none'
   }
   
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("generate-recipes").addEventListener("click", setupRecipeGeneration);
+  });
+
   
   function openRecipeDetails(recipeId) {
-      localStorage.setItem('selectedRecipe', JSON.stringify(recipes[recipeId]));
-      window.location.href = 'recipeDetailsPage/recipeDetails.html';
+    const recommendedRecipes = JSON.parse(sessionStorage.getItem('recommendedRecipes'));
+    localStorage.setItem('selectedRecipe', JSON.stringify(recommendedRecipes[recipeId]));
+    window.location.href = 'recipeDetailsPage/recipeDetails.html';
   }
   
   
@@ -299,7 +304,7 @@ const user = {
       generateButton.addEventListener('click', () => {
           const cookingSkill = document.getElementById('cooking-skill').value;
           const dietaryRestrictions = Array.from(document.getElementById('dietary-restrictions').selectedOptions).map(option => option.value);
-          const allergens = Array.from(document.getElementById('allergens').selectedOptions).map(option => option.value);
+          const allergens = Array.from(document.getElementById('allergens-recipe').selectedOptions).map(option => option.value);
           const combinedFoodItems = [...foodItemsInUserRefrigerator, ...foodItemsInUserPantry];
           const recommendedRecipes = generateRecipeRecommendations({
               cookingSkill,
@@ -311,12 +316,13 @@ const user = {
           document.getElementById('favorite-recipes-output').style.display = 'none';
           recipeOutput.style.display = 'block';
           if (recommendedRecipes.length > 0) {
-              const recipeList = recommendedRecipes.map((recipe, index) => `
-                  <li id="recipe-${index}" onclick="openRecipeDetails(${index})">
-                      ${recipe.name} (Skill Level: ${recipe.skillLevel}, Time: ${recipe.timeToMake} mins)
-                      <span class="favorite-star" data-recipe-id="${index}" onclick="toggleFav(${index}); event.stopPropagation();">☆</span>
-                  </li>`).join('');
-              recipeOutput.innerHTML = `<h3>Recommended Recipes:</h3><ul>${recipeList}</ul>`;
+            sessionStorage.setItem('recommendedRecipes', JSON.stringify(recommendedRecipes));
+            const recipeList = recommendedRecipes.map((recipe, index) => `
+                <li id="recipe-${index}" onclick="openRecipeDetails(${index})">
+                    ${recipe.name} (Skill Level: ${recipe.skillLevel}, Time: ${recipe.timeToMake} mins)
+                    <span class="favorite-star" data-recipe-id="${index}" onclick="toggleFav(${index}); event.stopPropagation();">☆</span>
+                </li>`).join('');
+            recipeOutput.innerHTML = `<h3>Recommended Recipes:</h3><ul>${recipeList}</ul>`;
           } else {
               recipeOutput.innerHTML = '<p>No suitable recipes found based on your selections.</p>';
           }
