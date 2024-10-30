@@ -228,6 +228,7 @@ function toggleHamburgerMenu() {
         return
     }
     document.getElementById('hamburger_main').style.display = 'none'
+}
 
 
 function openRecipeDetails(recipeId) {
@@ -277,7 +278,7 @@ function generateRecipeRecommendations({ cookingSkill, dietaryRestrictions, alle
     console.log(recipeList);
     return recipeList;
 }
-}
+
 
 const nameInputField = document.getElementById('name');
 const keyboardOverlay = document.getElementById('keyboard-overlay');
