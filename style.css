@@ -413,8 +413,8 @@ body {
 #keyboard-image {
     position: absolute; 
     display: none;
-    top: 60%;
+    top: 61.4vh;
     /* left: 150px;  */
-    width: 53.5%; 
-    height: auto;
+    width: 590px; 
+    height: fit-content;
 }
