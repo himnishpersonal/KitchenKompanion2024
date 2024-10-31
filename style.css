@@ -392,10 +392,10 @@ body {
     z-index: 1000;
 }
 
-.keyboard-image {
+/* .keyboard-image {
     max-width: 100%; 
     height: auto;
-}
+} */
 
 .close-keyboard {
     background-color: #FF6F00;
@@ -408,4 +408,13 @@ body {
     border-radius: 5px;
     width: 550px;
     padding-right: 70px;
+}
+
+#keyboard-image {
+    position: absolute; 
+    display: none;
+    top: 60%;
+    /* left: 150px;  */
+    width: 53.5%; 
+    height: auto;
 }
