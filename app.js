@@ -243,7 +243,8 @@ function toggleHamburgerMenu() {
 }
 
 function openRecipeDetails(recipeId) {
-    localStorage.setItem('selectedRecipe', JSON.stringify(recipes[recipeId]));
+    const recommendedRecipes = JSON.parse(localStorage.getItem('recommendedRecipes'));
+    localStorage.setItem('selectedRecipe', JSON.stringify(recommendedRecipes[recipeId]));
     window.location.href = 'recipeDetailsPage/recipeDetails.html';
 }
 
@@ -308,12 +309,14 @@ function setupRecipeGeneration() {
         recipeOutput.innerHTML = '';
         document.getElementById('favorite-recipes-output').style.display = 'none';
         recipeOutput.style.display = 'block';
+        localStorage.setItem('recommendedRecipes', JSON.stringify(recommendedRecipes));
         if (recommendedRecipes.length > 0) {
             const recipeList = recommendedRecipes.map((recipe, index) => `
                 <li id="recipe-${index}" onclick="openRecipeDetails(${index})">
                     ${recipe.name} (Skill Level: ${recipe.skillLevel}, Time: ${recipe.timeToMake} mins)
                     <span class="favorite-star" data-recipe-id="${index}" onclick="toggleFav(${index}); event.stopPropagation();">☆</span>
-                </li>`).join('');
+                </li>
+            `).join('');
             recipeOutput.innerHTML = `<h3>Recommended Recipes:</h3><ul>${recipeList}</ul>`;
         } else {
             recipeOutput.innerHTML = '<p>No suitable recipes found based on your selections.</p>';

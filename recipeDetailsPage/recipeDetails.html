@@ -26,20 +26,23 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const selectedRecipe = JSON.parse(localStorage.getItem('selectedRecipe'));
-
-            document.getElementById('recipe-name').textContent = selectedRecipe.name;
-            document.getElementById('skill-level').textContent = selectedRecipe.skillLevel;
-            document.getElementById('time-to-make').textContent = selectedRecipe.timeToMake;
-            document.getElementById('dietary-restrictions').textContent = selectedRecipe.dietaryRestrictions.join(', ');
-            document.getElementById('allergens').textContent = selectedRecipe.allergens.join(', ');
-            document.getElementById('instructions').textContent = selectedRecipe.instructions;
-            const ingredientsList = document.getElementById('ingredients-list');
-            selectedRecipe.ingredients.forEach(ingredient => {
-                const li = document.createElement('li');
-                li.textContent = ingredient;
-                ingredientsList.appendChild(li);
-            });
+            if (selectedRecipe) {
+                document.getElementById('recipe-name').textContent = selectedRecipe.name;
+                document.getElementById('skill-level').textContent = selectedRecipe.skillLevel;
+                document.getElementById('time-to-make').textContent = selectedRecipe.timeToMake;
+                document.getElementById('dietary-restrictions').textContent = selectedRecipe.dietaryRestrictions.join(', ');
+                document.getElementById('allergens').textContent = selectedRecipe.allergens.join(', ');
+                document.getElementById('instructions').textContent = selectedRecipe.instructions;
+        
+                const ingredientsList = document.getElementById('ingredients-list');
+                selectedRecipe.ingredients.forEach(ingredient => {
+                    const li = document.createElement('li');
+                    li.textContent = ingredient;
+                    ingredientsList.appendChild(li);
+                });
+            }
         });
+        
     </script>
     <script src="../app.js"></script>
 </body>
