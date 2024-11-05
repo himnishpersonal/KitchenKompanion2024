@@ -148,7 +148,13 @@ let foodItemsInUserRefrigerator = [
     new FoodItem('Ground Beef', '2024-10-19', 4, 'None'),
     new FoodItem('Shrimp', '2024-10-20', 2, 'Shellfish'),
     new FoodItem('Apples', '2024-10-15', 8, 'None'),
-    new FoodItem('Grapes', '2024-10-16', 5, 'None')
+    new FoodItem('Grapes', '2024-10-16', 5, 'None'),
+    //expired zone
+    new FoodItem('Havarti', '2024-10-14', 3, 'Dairy'),
+    new FoodItem('Sliced Turkey', '2024-10-19', 4, 'None'),
+    new FoodItem('Tuna', '2024-10-20', 2, 'None'),
+    new FoodItem('Peaches', '2024-10-15', 8, 'None'),
+    new FoodItem('Pears', '2024-10-16', 5, 'None')
 ]
 
 let foodItemsInUserPantry = [
@@ -166,7 +172,13 @@ let foodItemsInUserPantry = [
     new FoodItem('Honey', '2025-09-10', 1, 'None'),
     new FoodItem('Almonds', '2025-02-05', 3, 'Tree nuts'),
     new FoodItem('Cereal', '2025-01-20', 2, 'Gluten'),
-    new FoodItem('Spaghetti Sauce', '2025-02-15', 2, 'None')
+    new FoodItem('Spaghetti Sauce', '2025-02-15', 2, 'None'),
+    //expired zone
+    new FoodItem('Barley', '2024-10-14', 3, 'None'),
+    new FoodItem('Rye', '2024-10-19', 4, 'Gluten'),
+    new FoodItem('Nutella', '2024-10-20', 2, 'Dairy'),
+    new FoodItem('Coconut Water', '2024-10-15', 8, 'None'),
+    new FoodItem('Crackers', '2024-10-16', 5, 'Gluten')
 ]
 
 function openTab(tabNumber) {
