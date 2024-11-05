@@ -132,41 +132,41 @@ const recipes = [
 
 //food inventory
 let foodItemsInUserRefrigerator = [
-    new FoodItem('Carrots', '2024-11-01', 10, 'None'),
-    new FoodItem('Broccoli', '2024-10-20', 5, 'None'),
-    new FoodItem('Eggs', '2024-10-15', 12, 'None'),
-    new FoodItem('Chicken Breast', '2024-10-17', 3, 'None'),
-    new FoodItem('Tomatoes', '2024-10-18', 6, 'None'),
-    new FoodItem('Cheese', '2024-11-05', 2, 'Dairy'),
-    new FoodItem('Lettuce', '2024-11-01', 4, 'None'),
-    new FoodItem('Salmon', '2024-10-18', 2, 'None'),
-    new FoodItem('Bread', '2024-10-15', 5, 'Gluten'),
-    new FoodItem('Milk', '2024-10-29', 2, 'Dairy'),
-    new FoodItem('Yogurt', '2024-10-25', 6, 'Dairy'),
-    new FoodItem('Butter', '2024-11-10', 1, 'Dairy'),
-    new FoodItem('Spinach', '2024-10-14', 3, 'None'),
-    new FoodItem('Ground Beef', '2024-10-19', 4, 'None'),
-    new FoodItem('Shrimp', '2024-10-20', 2, 'Shellfish'),
-    new FoodItem('Apples', '2024-10-15', 8, 'None'),
-    new FoodItem('Grapes', '2024-10-16', 5, 'None')
+    new FoodItem('Carrots', '2028-11-01', 10, 'None'),
+    new FoodItem('Broccoli', '2028-10-20', 5, 'None'),
+    new FoodItem('Eggs', '2028-10-15', 12, 'None'),
+    new FoodItem('Chicken Breast', '2028-10-17', 3, 'None'),
+    new FoodItem('Tomatoes', '2028-10-18', 6, 'None'),
+    new FoodItem('Cheese', '2028-11-05', 2, 'Dairy'),
+    new FoodItem('Lettuce', '2028-11-01', 4, 'None'),
+    new FoodItem('Salmon', '2028-10-18', 2, 'None'),
+    new FoodItem('Bread', '2028-10-15', 5, 'Gluten'),
+    new FoodItem('Milk', '2028-10-29', 2, 'Dairy'),
+    new FoodItem('Yogurt', '2028-10-25', 6, 'Dairy'),
+    new FoodItem('Butter', '2028-11-10', 1, 'Dairy'),
+    new FoodItem('Spinach', '2028-10-14', 3, 'None'),
+    new FoodItem('Ground Beef', '2028-10-19', 4, 'None'),
+    new FoodItem('Shrimp', '2028-10-20', 2, 'Shellfish'),
+    new FoodItem('Apples', '2028-10-15', 8, 'None'),
+    new FoodItem('Grapes', '2028-10-16', 5, 'None')
 ]
 
 let foodItemsInUserPantry = [
-    new FoodItem('Peanut Butter', '2024-12-10', 1, 'Peanuts'),
-    new FoodItem('Rice', '2024-12-25', 20, 'None'),
-    new FoodItem('Pasta', '2024-12-30', 10, 'Gluten'),
-    new FoodItem('Canned Tomatoes', '2025-01-15', 6, 'None'),
-    new FoodItem('Olive Oil', '2025-06-01', 1, 'None'),
-    new FoodItem('Flour', '2025-05-10', 4, 'Gluten'),
-    new FoodItem('Sugar', '2025-03-18', 3, 'None'),
-    new FoodItem('Salt', '2025-07-20', 1, 'None'),
-    new FoodItem('Black Beans', '2025-01-01', 5, 'None'),
-    new FoodItem('Chickpeas', '2025-01-01', 5, 'None'),
-    new FoodItem('Oats', '2025-04-10', 4, 'None'),
-    new FoodItem('Honey', '2025-09-10', 1, 'None'),
-    new FoodItem('Almonds', '2025-02-05', 3, 'Tree nuts'),
-    new FoodItem('Cereal', '2025-01-20', 2, 'Gluten'),
-    new FoodItem('Spaghetti Sauce', '2025-02-15', 2, 'None')
+    new FoodItem('Peanut Butter', '2028-12-10', 1, 'Peanuts'),
+    new FoodItem('Rice', '2028-12-25', 20, 'None'),
+    new FoodItem('Pasta', '2028-12-30', 10, 'Gluten'),
+    new FoodItem('Canned Tomatoes', '2028-01-15', 6, 'None'),
+    new FoodItem('Olive Oil', '2028-06-01', 1, 'None'),
+    new FoodItem('Flour', '2028-05-10', 4, 'Gluten'),
+    new FoodItem('Sugar', '2028-03-18', 3, 'None'),
+    new FoodItem('Salt', '2028-07-20', 1, 'None'),
+    new FoodItem('Black Beans', '2028-01-01', 5, 'None'),
+    new FoodItem('Chickpeas', '2028-01-01', 5, 'None'),
+    new FoodItem('Oats', '2028-04-10', 4, 'None'),
+    new FoodItem('Honey', '2028-09-10', 1, 'None'),
+    new FoodItem('Almonds', '2028-02-05', 3, 'Tree nuts'),
+    new FoodItem('Cereal', '2028-01-20', 2, 'Gluten'),
+    new FoodItem('Spaghetti Sauce', '2028-02-15', 2, 'None')
 ]
 
 function openTab(tabNumber) {
@@ -238,7 +238,9 @@ function openRecipeDetails(recipeId) {
 
 function generateRecipeRecommendations({ cookingSkill, dietaryRestrictions, allergens }, foodItems) {
     let recipeList = [];
-    const availableFoodNames = foodItems.map(item => item.name.toLowerCase());
+    const availableFoodNames = foodItems
+    .filter(item => !isExpired(item))  
+    .map(item => item.name.toLowerCase());
     for (let i = 0; i < recipes.length; i++) {
         let recipe = recipes[i];
         let allIngredientsAvailable = true; 
