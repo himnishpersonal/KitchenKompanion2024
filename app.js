@@ -341,7 +341,7 @@ favoriteButton.addEventListener('click', function() {
   
 let favoriteRecipes = [];
 function toggleFav(recipeId) {
-    const recipe = recipes[recipeId];
+    const recipe = recipes[recipeId + 1];
     const star = document.querySelector(`#recipe-${recipeId} .favorite-star`);
 
     const isFavorited = favoriteRecipes.some(favRecipe => favRecipe.name === recipe.name);
