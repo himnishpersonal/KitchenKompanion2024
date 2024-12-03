@@ -56,28 +56,6 @@ body {
     cursor: pointer;
 }
 
-.hamburger-menu {
-    font-size: 25px;
-    cursor: pointer;
-}
-
-.hamburger-dropdown-container {
-    font-size: 1rem;
-    position: absolute;
-    display: block; 
-    /* to be changed to display: block; upon pressed menu */
-}
-
-.hamburger-dropdown {
-    flex-direction: column;
-    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.hamburger-item {
-    padding: 20px;
-    background-color: white;
-    color: black;
-}
 
 .title-bar h1 {
     margin: 0;
